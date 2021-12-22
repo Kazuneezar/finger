@@ -60,12 +60,16 @@
     async function predict() {
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
+        if (prediction[0].probability.toFixed(2)>0.95){//[0]=0 0が95％以上と認識した場合
+            window.location.href = "./0.html";
+        }
+
         for (let i = 0; i < maxPredictions; i++) {
             const classPrediction =
                 prediction[i].className + ": " + prediction[i].probability.toFixed(2);
             labelContainer.childNodes[i].innerHTML = classPrediction;
         }
-    }
+    
 </script>
 
 </head>
