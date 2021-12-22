@@ -56,13 +56,18 @@
         window.requestAnimationFrame(loop);
     }
 
-    document.write("指の数を認識するシステムです。");
-    setTimeout(2000);
+    
     
     let X = 0
 
     // run the webcam image through the image model
     async function predict() {
+
+        let str ="指の数を認識するシステムです。";
+        console.log(str);
+        setTimeout(2000);
+        let ret = str.replace("指の数を認識するシステムです。","");
+        console.log(ret);
 
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
