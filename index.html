@@ -9,7 +9,7 @@
 </head>
 <body>
     <div>脳トレゲームに挑戦</div>
-<button type="button" onclick="init()">Start</button>
+<button type="button" onclick="init()">開始する</button>
 <div id="webcam-container"></div>
 <div id="label-container"></div>
 <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
@@ -20,7 +20,6 @@
 
     // the link to your model provided by Teachable Machine export panel
     const URL = "./my_model/";
-
     let model, webcam, labelContainer, maxPredictions;
 
     // Load the image model and setup the webcam
