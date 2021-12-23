@@ -1,26 +1,66 @@
+<!DOCTYPE html>
 <html>
 <head>
-<TITLE>テキストエリアに複数項表示する</TITLE>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>脳トレゲームに挑戦</title>
+<script type="text/javascript" src="../../../data/js/jquery.js"></script>
+<script type="text/javascript">
+<!--
+$(function(){
 
-<script language="JavaScript"><!--
-function setChars(text)
-{
-if (document.myFORM.myTEXT.value || "") {
-document.myFORM.myTEXT.value = document.myFORM.myTEXT.value + "\n"
-}
+	$(".change").click(function(){
+	
+		for( $i=1; $i<4; $i++ ){
+		
+			if( $i == 3 ){
+			
+				$j = 1;
+			
+			}
+			else{
+			
+				$j = $i + 1;
+			
+			}
+			
+			if( $( "#cm" + $i ).css( "display" ) != "none" ){
+			
+				$( "#cm" + $i ).hide();
+				$( "#cm" + $j ).show();
+				break;
+			
+			}
+		
+		}
+	
+	});
 
-document.myFORM.myTEXT.value = document.myFORM.myTEXT.value + text
-}
-/--></script>
+});
+//-->
+</script>
 </head>
+
 <body>
-<form name="myFORM">
-<textarea name="myTEXT"rows="10"></textarea><br>
-<input type="button" value="月曜" onClick="setChars('AAAAA')">
-<input type="button" value="火曜" onClick="setChars('BBBBB')">
-<input type="button" value="水曜" onClick="setChars('CCCCC')">
-<input type="button" value="木曜" onClick="setChars('DDDDD')">
-<input type="button" value="金曜" onClick="setChars('EEEEE')">
-</form>
+
+<div style="padding:50px 0px 50px 0px">
+<div id="cm1" style="display:block;border:1px solid #cccccc;padding:5px 10px 5px 10px;">
+<p class="change">一番目の表示項目です。<br>
+クリックすると二番目のメニューを表示します。</p>
+</div>
+
+
+<div id="cm2" style="display:none;border:1px solid #cc0000;padding:5px 10px 5px 10px;">
+<p class="change">二番目のメニューです。<br>
+クリックすると三番目のテキストメッセージを表示します。</p>
+</div>
+
+
+<div id="cm3" style="display:none;border:1px solid #0000cc;padding:5px 10px 5px 10px;">
+<p class="change">三番目のテキストメッセージです。<br>
+クリックすると一番目の表示項目を表示します。</p>
+</div>
+</div>
+
+
 </body>
 </html>
