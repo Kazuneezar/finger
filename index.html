@@ -57,6 +57,8 @@
         window.requestAnimationFrame(loop);
     }
 
+    for(let q=0 ; q<21 ; q++){
+
     
 
         var X = 0;
@@ -104,12 +106,14 @@
                     var X =0;
                     if(C==1){
                         labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 0' )//0と文字を表示する
+                        break;
                         //if (A==X){
                             //labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 0  OK!' )
                             //setTimeout('break',300);
                             //}
                     }else if(C==2){
-                        labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 0')   
+                        labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 0') 
+                        break;  
                         //if (A==X){
                             //labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 0  OK!' )
                             //setTimeout('break',300);
@@ -193,8 +197,8 @@
                 }
             }
         
-    
-
+        }
+        console.log(q);
 
     }
       
