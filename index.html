@@ -26,186 +26,175 @@
 
     // Load the image model and setup the webcam
     async function init() {
+        const modelURL = URL + "model.json";
+        const metadataURL = URL + "metadata.json";
 
-        for(let q=0; q<20; q++){
+        // load the model and metadata
+        // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
+        // or files from your local hard drive
+        // Note: the pose library adds "tmImage" object to your window (window.tmImage)
+        model = await tmImage.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
 
-            const modelURL = URL + "model.json";
-            const metadataURL = URL + "metadata.json";
+        // Convenience function to setup a webcam
+        const flip = true; // whether to flip the webcam
+        webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
+        await webcam.setup(); // request access to the webcam
+        await webcam.play();
+        window.requestAnimationFrame(loop);
 
-            // load the model and metadata
-            // Refer to tmImage.loadFromFiles() in the API to support files from a file picker
-            // or files from your local hard drive
-            // Note: the pose library adds "tmImage" object to your window (window.tmImage)
-            model = await tmImage.load(modelURL, metadataURL);
-            maxPredictions = model.getTotalClasses();
+        // append elements to the DOM
+        document.getElementById("webcam-container").appendChild(webcam.canvas);
+        labelContainer = document.getElementById("label-container");
+        for (let i = 0; i < maxPredictions; i++) { // and class labels
+            labelContainer.appendChild(document.createElement("div"));
+        }
+    }
 
-            // Convenience function to setup a webcam
-            const flip = true; // whether to flip the webcam
-            webcam = new tmImage.Webcam(200, 200, flip); // width, height, flip
-            await webcam.setup(); // request access to the webcam
-            await webcam.play();
-            window.requestAnimationFrame(loop);
+    async function loop() {
+        webcam.update(); // update the webcam frame
+        await predict();
+        window.requestAnimationFrame(loop);
+    }
 
-            // append elements to the DOM
-            document.getElementById("webcam-container").appendChild(webcam.canvas);
-            labelContainer = document.getElementById("label-container");
-            for (let i = 0; i < maxPredictions; i++) { // and class labels
-                labelContainer.appendChild(document.createElement("div"));
-            }
-        
+    
 
-        async function loop() {
-            webcam.update(); // update the webcam frame
-            await predict();
-            window.requestAnimationFrame(loop);
+        var X = 0;
+        var t1 = Math.floor(Math.random() * 19) + 1;
+        var t2 = Math.floor(Math.random() * 19) + 1;
+        var C  = Math.floor(Math.random()*2 + 1);
+        var A  = 0;
+
+        if(C==1){
+            var A = t1+t2;
+        }else if(C==2){
+            var A = t1-t2;
         }
 
-        
-
-
-
-        
-
-            var X = 0;
+        while(t1==t2){
             var t1 = Math.floor(Math.random() * 19) + 1;
             var t2 = Math.floor(Math.random() * 19) + 1;
-            var C  = Math.floor(Math.random()*2 + 1);
-            var A  = 0;
-
             if(C==1){
                 var A = t1+t2;
             }else if(C==2){
                 var A = t1-t2;
             }
+        }
 
-            while(t1==t2){
-                var t1 = Math.floor(Math.random() * 19) + 1;
-                var t2 = Math.floor(Math.random() * 19) + 1;
-                if(C==1){
-                    var A = t1+t2;
-                }else if(C==2){
-                    var A = t1-t2;
-                }
+        while(A<0 || A>5){
+            var t1 = Math.floor(Math.random() * 19) + 1;
+            var t2 = Math.floor(Math.random() * 19) + 1;
+            if(C==1){
+                var A = t1+t2;
+            }else if(C==2){
+                var A = t1-t2;
             }
+        }
+        // run the webcam image through the image model
+        async function predict() {
 
-            while(A<0 || A>5){
-                var t1 = Math.floor(Math.random() * 19) + 1;
-                var t2 = Math.floor(Math.random() * 19) + 1;
-                if(C==1){
-                    var A = t1+t2;
-                }else if(C==2){
-                    var A = t1-t2;
-                }
-            }
-            // run the webcam image through the image model
-            async function predict() {
-
-            
+        
 
 
-                // predict can take in an image, video or canvas html element
-                const prediction = await model.predict(webcam.canvas);
+            // predict can take in an image, video or canvas html element
+            const prediction = await model.predict(webcam.canvas);
 
-                for (let i = 0; i < maxPredictions; i++) {
-                    if (prediction[0].probability.toFixed(2)>0.95){//[0]=0 0が95％以上と認識した場合
-                        var X =0;
-                        if(C==1){
-                            labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 0' )//0と文字を表示する
-                            break;
-                            //if (A==X){
-                                //labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 0  OK!' )
-                                //setTimeout('break',300);
-                                //}
-                        }else if(C==2){
-                            labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 0') 
-                            break;  
-                            //if (A==X){
-                                //labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 0  OK!' )
-                                //setTimeout('break',300);
-                                //}                
-                        }
-                    }else if(prediction[1].probability.toFixed(2)>0.95){
-                        var X =1;
-                        if(C==1){
-                            labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 1')
-                            //if (A==X){
-                                //labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 1  OK!' )
-                                //setTimeout('break',300);
-                                //}
-                        }else if(C==2){
-                            labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 1')  
-                            //if (A==X){
-                                //labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 1  OK!' )
-                                //setTimeout('break',300);
-                                //}                
-                        }
-                    }else if(prediction[2].probability.toFixed(2)>0.95){
-                        var X =2;
-                        if(C==1){
-                            labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 2')
-                            //if (A==X){
-                            //   labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 2  OK!' )
-                            //    //setTimeout('break',300);
-                            //   }
-                        }else if(C==2){
-                            labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 2')  
-                            //if (A==X){
-                            // labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 2  OK!' )
-                                //setTimeout('break',300);
-                            //   }                  
-                        }
-                    }else if(prediction[3].probability.toFixed(2)>0.95){
-                        var X =3;
-                        if(C==1){
-                            labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 3')
-                            //if (A==X){
-                                //labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 3  OK!' )
-                                //setTimeout('break',300);
-                            // }
-                        }else if(C==2){
-                            labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 3')
-                            //if (A==X){
-                                //labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 3  OK!' )
-                                //setTimeout('break',300);
-                                //}                
-                        }
-                    }else if(prediction[4].probability.toFixed(2)>0.95){
-                        var X =4;
-                        if(C==1){
-                            labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 4')
-                            //if (A==X){
-                                //labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 4  OK!' )
-                                //setTimeout('break',300);
-                                //}
-                        }else if(C==2){
-                            labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 4')  
-                            //if (A==X){
-                                //labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 4  OK!' )
-                                //setTimeout('break',300);
-                                //}                 
-                        }
-                    }else if(prediction[5].probability.toFixed(2)>0.95){
-                        var X =5;
-                        if(C==1){
-                            labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 5')
-                            //if (A==X){
-                            // labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 5  OK!' )
-                                //setTimeout('break',300);
-                            // }
-                        }else if(C==2){
-                            labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 5' ) 
-                            //if (A==X){
-                                //labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 5  OK!' )
-                                //setTimeout('break',300);
-                                //}                 
-                        }
+            for (let i = 0; i < maxPredictions; i++) {
+                if (prediction[0].probability.toFixed(2)>0.95){//[0]=0 0が95％以上と認識した場合
+                    var X =0;
+                    if(C==1){
+                        labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 0' )//0と文字を表示する
+                        //if (A==X){
+                            //labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 0  OK!' )
+                            //setTimeout('break',300);
+                            //}
+                    }else if(C==2){
+                        labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 0')   
+                        //if (A==X){
+                            //labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 0  OK!' )
+                            //setTimeout('break',300);
+                            //}                
+                    }
+                }else if(prediction[1].probability.toFixed(2)>0.95){
+                    var X =1;
+                    if(C==1){
+                        labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 1')
+                        //if (A==X){
+                            //labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 1  OK!' )
+                            //setTimeout('break',300);
+                            //}
+                    }else if(C==2){
+                        labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 1')  
+                        //if (A==X){
+                            //labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 1  OK!' )
+                            //setTimeout('break',300);
+                            //}                
+                    }
+                }else if(prediction[2].probability.toFixed(2)>0.95){
+                    var X =2;
+                    if(C==1){
+                        labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 2')
+                        //if (A==X){
+                         //   labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 2  OK!' )
+                        //    //setTimeout('break',300);
+                         //   }
+                    }else if(C==2){
+                        labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 2')  
+                        //if (A==X){
+                           // labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 2  OK!' )
+                            //setTimeout('break',300);
+                         //   }                  
+                    }
+                }else if(prediction[3].probability.toFixed(2)>0.95){
+                    var X =3;
+                    if(C==1){
+                        labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 3')
+                        //if (A==X){
+                            //labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 3  OK!' )
+                            //setTimeout('break',300);
+                           // }
+                    }else if(C==2){
+                        labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 3')
+                        //if (A==X){
+                            //labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 3  OK!' )
+                            //setTimeout('break',300);
+                            //}                
+                    }
+                }else if(prediction[4].probability.toFixed(2)>0.95){
+                    var X =4;
+                    if(C==1){
+                        labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 4')
+                        //if (A==X){
+                            //labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 4  OK!' )
+                            //setTimeout('break',300);
+                            //}
+                    }else if(C==2){
+                        labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 4')  
+                        //if (A==X){
+                            //labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 4  OK!' )
+                            //setTimeout('break',300);
+                            //}                 
+                    }
+                }else if(prediction[5].probability.toFixed(2)>0.95){
+                    var X =5;
+                    if(C==1){
+                        labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 5')
+                        //if (A==X){
+                           // labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 5  OK!' )
+                            //setTimeout('break',300);
+                           // }
+                    }else if(C==2){
+                        labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 5' ) 
+                        //if (A==X){
+                            //labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 5  OK!' )
+                            //setTimeout('break',300);
+                            //}                 
                     }
                 }
-            
             }
-            console.log(q)
-            var q++;
-    }
+        
+    
+
 
     }
       
