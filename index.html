@@ -21,6 +21,7 @@
     // https://github.com/googlecreativelab/teachablemachine-community/tree/master/libraries/image
 
     // the link to your model provided by Teachable Machine export panel
+    console.log(aaaa);
     const URL = "./my_model/";
     let model, webcam, labelContainer, maxPredictions;
 
@@ -60,7 +61,7 @@
         // run the webcam image through the image model
         async function predict() {
 
-            var X = 0;
+        var X = 0;
         var t1 = Math.floor(Math.random() * 19) + 1;
         var t2 = Math.floor(Math.random() * 19) + 1;
         var C  = Math.floor(Math.random()*2 + 1);
@@ -190,7 +191,7 @@
                     }
                 }
 
-            console.log(i);
+            
             }
         
     
