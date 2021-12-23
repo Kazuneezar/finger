@@ -54,11 +54,13 @@
         }
         }
         var q = 0;
-        var X = 10;
+        var X = 0;
         var t1 = Math.floor(Math.random() * 19) + 1;
         var t2 = Math.floor(Math.random() * 19) + 1;
         var C  = Math.floor(Math.random()*2 + 1);
         var A  = 0;
+
+        if(A ==X){
 
         if(C==1){
             var A = t1+t2;
@@ -84,6 +86,7 @@
             }else if(C==2){
                 var A = t1-t2;
             }
+        }
         }
 
 
@@ -96,40 +99,6 @@
 
         // run the webcam image through the image model
         async function predict() {
-
-            if (A == X){
-                var t1 = Math.floor(Math.random() * 19) + 1;
-        var t2 = Math.floor(Math.random() * 19) + 1;
-        var C  = Math.floor(Math.random()*2 + 1);
-        var A  = 0;
-
-        if(C==1){
-            var A = t1+t2;
-        }else if(C==2){
-            var A = t1-t2;
-        }
-
-        while(t1==t2){
-            var t1 = Math.floor(Math.random() * 19) + 1;
-            var t2 = Math.floor(Math.random() * 19) + 1;
-            if(C==1){
-                var A = t1+t2;
-            }else if(C==2){
-                var A = t1-t2;
-            }
-        }
-
-        while(A<0 || A>5){
-            var t1 = Math.floor(Math.random() * 19) + 1;
-            var t2 = Math.floor(Math.random() * 19) + 1;
-            if(C==1){
-                var A = t1+t2;
-            }else if(C==2){
-                var A = t1-t2;
-            }
-        }
-
-            }
 
             // predict can take in an image, video or canvas html element
             const prediction = await model.predict(webcam.canvas);
