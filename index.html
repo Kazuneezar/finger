@@ -59,13 +59,14 @@
 
 
     let X = 0
+    var t1 = Math.floor(Math.random() * 19) + 1;
+    var t2 = Math.floor(Math.random() * 19) + 1;
+    var C  = Math.floor(Math.random()*2 + 1);
 
     // run the webcam image through the image model
     async function predict() {
 
-        var t1 = Math.floor(Math.random() * 19) + 1;
-        var t2 = Math.floor(Math.random() * 19) + 1;
-        var C  = Math.floor(Math.random()*2 + 1);
+    
 
 
         // predict can take in an image, video or canvas html element
