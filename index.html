@@ -27,6 +27,7 @@
 
     // Load the image model and setup the webcam
     async function init() {
+        console.log('poyo');
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
 
@@ -48,11 +49,13 @@
         document.getElementById("webcam-container").appendChild(webcam.canvas);
         labelContainer = document.getElementById("label-container");
         for (let i = 0; i < maxPredictions; i++) { // and class labels
+            console.log('cinnamon')
             labelContainer.appendChild(document.createElement("div"));
         }
     }
 
     async function loop() {
+        console.log('nori')
         webcam.update(); // update the webcam frame
         await predict();
         window.requestAnimationFrame(loop);
