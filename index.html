@@ -25,6 +25,7 @@
     let model, webcam, labelContainer, maxPredictions;
 
     // Load the image model and setup the webcam
+    while(1){
     async function init() {
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
@@ -193,12 +194,14 @@
                 }
 
             console.log(i);
+            break;
             }
         
     
 
 
     }
+}
       
 </script>
 
