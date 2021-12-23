@@ -99,7 +99,7 @@
             // predict can take in an image, video or canvas html element
             const prediction = await model.predict(webcam.canvas);
 
-            for (let i = 0; i < maxPredictions; i++) {
+            //for (let i = 0; i < maxPredictions; i++) {
                 if (prediction[0].probability.toFixed(2)>0.95){//[0]=0 0が95％以上と認識した場合
                     var X =0;
                     if(C==1){
@@ -193,7 +193,7 @@
                 }
 
             
-            }
+            //}
 
             var q = q+1;
             console.log(q);
