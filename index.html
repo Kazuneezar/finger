@@ -80,12 +80,11 @@
 
         async function loop() {
         webcam.update(); // update the webcam frame
-        await predict();
         window.requestAnimationFrame(loop);
         }
 
         // run the webcam image through the image model
-        async function predict() {
+        while(X=100){
         
         console.log('kapu')
         console.log(A)
