@@ -84,6 +84,8 @@
 
         // run the webcam image through the image model
         async function predict() {
+
+        console.log('start')
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
 
@@ -406,7 +408,7 @@
         }                 
         }
         }   
-        
+        console.log('end')
         }    
     
         
