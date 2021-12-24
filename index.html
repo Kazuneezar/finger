@@ -361,13 +361,14 @@
         }
     console.log(t)
 
-    if (p>20){
+    if (p>3){
     const endTime = Date.now(); // 終了時間
     time=Math.floor((endTime - startTime)/1000);
     minute = Math.floor(time/60);
     second = time%60
     labelContainer.childNodes[0].innerHTML = ('FINISH!  あなたのタイムは'+minute+'分'+second+'秒'+'です!');
     labelContainer.childNodes[1].innerHTML = ('もう一度チャレンジするときは再読み込みしてください。');  
+    labelContainer.childNodes[2].innerHTML = ('time:'+time+'minute:'+minute+'second:'+second);
     }
     }
         
