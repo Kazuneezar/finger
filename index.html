@@ -101,7 +101,7 @@
         const prediction = await model.predict(webcam.canvas);
 
         //for (let i = 0; i < maxPredictions; i++) {
-        if (prediction[0].probability.toFixed(2)>0.95){//[0]=0 0が95％以上と認識した場合
+        if (prediction[5].probability.toFixed(2)>0.95){//[0]=0 0が95％以上と認識した場合
             X =0;
             if (A==X){
             if(C==1){
@@ -145,7 +145,7 @@
             t=0;      
             }
         
-        }else if (prediction[1].probability.toFixed(2)>0.95){//[1]=1 0が95％以上と認識した場合
+        }else if (prediction[0].probability.toFixed(2)>0.95){//[1]=1 0が95％以上と認識した場合
             X =1;
             if (A==X){
             if(C==1){
@@ -188,7 +188,7 @@
             }
             t=0;      
             }   
-        }else if (prediction[2].probability.toFixed(2)>0.95){
+        }else if (prediction[1].probability.toFixed(2)>0.95){
             X =2;
             if (A==X){
             if(C==1){
@@ -231,7 +231,7 @@
             }
             t=0;      
             }
-        }else if (prediction[3].probability.toFixed(2)>0.95){
+        }else if (prediction[2].probability.toFixed(2)>0.95){
             X =3;
             if (A==X){
             if(C==1){
@@ -274,7 +274,7 @@
             }
             t=0;      
             }
-        }else if (prediction[4].probability.toFixed(2)>0.95){
+        }else if (prediction[3].probability.toFixed(2)>0.95){
             X =4;
             if (A==X){
             if(C==1){
@@ -317,7 +317,7 @@
             }
             t=0;      
             }
-        }else if (prediction[5].probability.toFixed(2)>0.95){
+        }else if (prediction[4].probability.toFixed(2)>0.95){
             X =5;
             if(A==X){
             if(C==1){
@@ -351,15 +351,23 @@
                 }
                 p++;
                 labelContainer.childNodes[1].innerHTML = (p+'/20');
-            }
-            }else if(A!=X){
+        }
+        }else if(A!=X){
             if(C==1){
             labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 5' )
             }else if(C==2){
             labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 5')
             }
             t=0;      
-            }
+        }
+    }else if (prediction[7].probability.toFixed(2)>0.95){
+        X =10;    
+        if(C==1){
+        labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= ?' )
+        }else if(C==2){
+        labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= ?')
+        }
+        t=0;      
         }else{
         t=0;
         }
