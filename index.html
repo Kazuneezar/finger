@@ -99,7 +99,7 @@
             console.log('poyo!')
             }
             t++;
-            }else(A!=X){
+            }else if(A!=X){
             if(C==1){
             labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 0' )//0と文字を表示する
             }else if(C==2){
@@ -119,7 +119,7 @@
             console.log('poyo!')
             }
             t++;
-            }else(A!=X){
+            }else if(A!=X){
             if(C==1){
             labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 1' )//1と文字を表示する
             }else if(C==2){
@@ -138,7 +138,7 @@
             console.log('poyo!')
             }
             t++;
-            }else(A!=X){
+            }else if(A!=X){
             if(C==1){
             labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 2' )
             }else if(C==2){
@@ -176,7 +176,7 @@
             console.log('poyo!')
             }
             t++;
-            }else(A!=X){
+            }else if(A!=X){
             if(C==1){
             labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 4' )
             }else if(C==2){
@@ -186,7 +186,7 @@
             }
         }else if (prediction[5].probability.toFixed(2)>0.95){
             X =5;
-            if (A==X){
+            if(A==X){
             if(C==1){
             labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 5  OK!' )
             console.log('poyo!')
@@ -195,7 +195,7 @@
             console.log('poyo!')
             }
             t++;
-            }else(A!=X){
+            }else if(A!=X){
             if(C==1){
             labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 5' )
             }else if(C==2){
