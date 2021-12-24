@@ -367,9 +367,10 @@
     trigger = 1;
 
     if (p>3){
-    end = Date.now(); // 終了時間
-    console.log(start);
-    console.log(end);
+        if(trigger==1){
+        end = Date.now(); // 終了時間
+        }
+    trigger=2;
     time=Math.floor((end - start)/1000);
     minute = Math.floor(time/60);
     second = time%60
