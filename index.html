@@ -53,7 +53,6 @@
             labelContainer.appendChild(document.createElement("div"));
         }
         labelContainer.childNodes[1].innerHTML = (p+'/20')
-        const startTime = Date.now(); // 開始時間
 
         }
         
@@ -92,6 +91,8 @@
 
         // run the webcam image through the image model
         async function predict() {
+        console.log(Hi);
+        const startTime = Date.now(); // 開始時間
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
 
