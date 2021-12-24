@@ -57,6 +57,7 @@
         }
         
         var start =0;
+        var trigger=0;
         var end =0;
         var time =0;
         var minute =0;
@@ -93,8 +94,9 @@
 
         // run the webcam image through the image model
         async function predict() {
-        console.log('Hi');
+        if (trigger==0){
         start = Date.now(); // 開始時間
+        }
         // predict can take in an image, video or canvas html element
         const prediction = await model.predict(webcam.canvas);
 
@@ -362,6 +364,7 @@
         t=0;
         }
     console.log(t)
+    trigger = 1;
 
     if (p>3){
     end = Date.now(); // 終了時間
