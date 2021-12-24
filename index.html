@@ -364,7 +364,9 @@
         t=0;
         }
     console.log(t)
+    if(p<3){
     trigger = 1;
+    }
 
     if (p>3){
         if(trigger==1){
@@ -376,7 +378,6 @@
     second = time%60
     labelContainer.childNodes[0].innerHTML = ('FINISH!  あなたのタイムは'+minute+'分'+second+'秒'+'です!');
     labelContainer.childNodes[1].innerHTML = ('もう一度チャレンジするときは再読み込みしてください。');  
-    labelContainer.childNodes[2].innerHTML = ('time:'+time+'minute:'+minute+'second:'+second);
     }
     }
         
