@@ -54,7 +54,7 @@
         }
         }
         
-
+        var t =0;
         var t1 = Math.floor(Math.random() * 19) + 1;
         var t2 = Math.floor(Math.random() * 19) + 1;
         var C  = Math.floor(Math.random()*2 + 1);
@@ -95,12 +95,14 @@
         if (A==X){
         labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 0  OK!' )
         console.log('poyo!')
+        var t++
         }
         }else if(C==2){
         labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 0')   
         if (A==X){
         labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 0  OK!' )
         console.log('poyo!')
+        var t++
         }                
         }
         }else if(prediction[1].probability.toFixed(2)>0.95){
@@ -110,12 +112,14 @@
         if (A==X){
         labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 1  OK!' )
         console.log('poyo!')
+        var t++
         }
         }else if(C==2){
         labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 1')  
         if (A==X){
         labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 1  OK!' )
         console.log('poyo!')
+        var t++
         }                
         }
         }else if(prediction[2].probability.toFixed(2)>0.95){
@@ -125,12 +129,14 @@
         if (A==X){
         labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 2  OK!' )
         console.log('poyo!')
+        var t++
         }
         }else if(C==2){
         labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 2')  
         if (A==X){
         labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 2  OK!' )
         console.log('poyo!')
+        var t++
         }                  
         }
         }else if(prediction[3].probability.toFixed(2)>0.95){
@@ -140,12 +146,14 @@
         if (A==X){
         labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 3  OK!' )
         console.log('poyo!')
+        var t++
         }
         }else if(C==2){
         labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 3')
         if (A==X){
         labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 3  OK!' )
         console.log('poyo!')
+        var t++
         }                
         }
         }else if(prediction[4].probability.toFixed(2)>0.95){
@@ -155,12 +163,14 @@
         if (A==X){
         labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 4  OK!' )
         console.log('poyo!')
+        var t++
         }
         }else if(C==2){
         labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 4')  
         if (A==X){
         labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 4  OK!' )
         console.log('poyo!')
+        var t++
         }                 
         }
         }else if(prediction[5].probability.toFixed(2)>0.95){
@@ -170,16 +180,19 @@
         if (A==X){
         labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 5  OK!' )
         console.log('poyo!')
+        var t++
         }
         }else if(C==2){
         labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 5' ) 
         if (A==X){
         labelContainer.childNodes[0].innerHTML = (t1+'-'+t2+'= 5  OK!' )
         console.log('poyo!')
+        var t++
         }                 
         }
         }   
         
+        console.log(t)
         }    
     
         
