@@ -22,17 +22,12 @@
 
     // the link to your model provided by Teachable Machine export panel
     console.log("aaaa");
-    let q =0;
-    console.log(q)
     const URL = "./my_model/";
     let model, webcam, labelContainer, maxPredictions;
 
     // Load the image model and setup the webcam
     async function init() {
         console.log('poyo');
-        let q =1;
-        console.log(q);
-
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
 
@@ -59,7 +54,7 @@
         }
         }
         
-        while(q=1){
+
         var t1 = Math.floor(Math.random() * 19) + 1;
         var t2 = Math.floor(Math.random() * 19) + 1;
         var C  = Math.floor(Math.random()*2 + 1);
@@ -185,8 +180,7 @@
         }
         }   
         
-        } 
-    }   
+        }    
     
         
       
