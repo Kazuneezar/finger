@@ -95,6 +95,7 @@
         //for (let i = 0; i < maxPredictions; i++) {
         if (prediction[0].probability.toFixed(2)>0.95){//[0]=0 0が95％以上と認識した場合
         var X =0;
+        console.log(X);
         if(C==1){
         labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 0' )//0と文字を表示する
         if (A==X){
@@ -110,6 +111,7 @@
         }
         }else if(prediction[1].probability.toFixed(2)>0.95){
         var X =1;
+        console.log(X);
         if(C==1){
         labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 1')
         if (A==X){
@@ -125,6 +127,7 @@
         }
         }else if(prediction[2].probability.toFixed(2)>0.95){
         var X =2;
+        console.log(X);
         if(C==1){
         labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 2')
         if (A==X){
@@ -140,6 +143,7 @@
         }
         }else if(prediction[3].probability.toFixed(2)>0.95){
         var X =3;
+        console.log(X);
         if(C==1){
         labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 3')
         if (A==X){
@@ -155,6 +159,7 @@
         }
         }else if(prediction[4].probability.toFixed(2)>0.95){
         var X =4;
+        console.log(X);
         if(C==1){
         labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 4')
         if (A==X){
@@ -170,6 +175,7 @@
         }
         }else if(prediction[5].probability.toFixed(2)>0.95){
         var X =5;
+        console.log(X);
         if(C==1){
         labelContainer.childNodes[0].innerHTML = (t1+'+'+t2+'= 5')
         if (A==X){
@@ -185,10 +191,7 @@
         }
         }   
         if(A==X){
-            console.log(A)
-            console.log(X)
-
-            var X = 0;
+        var X = 0;
         var t1 = Math.floor(Math.random() * 19) + 1;
         var t2 = Math.floor(Math.random() * 19) + 1;
         var C  = Math.floor(Math.random()*2 + 1);
