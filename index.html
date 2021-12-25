@@ -56,6 +56,21 @@
         labelContainer.childNodes[1].innerHTML = (p+'/20')
 
         }
+
+        var nd = document.getElementById("pic");
+var url ="1.jpg";
+dispic(nd, url, 100, 750);
+
+function dispic(nd, url, x, y) {
+  var image = new Image();
+  image.src = url;
+  image.width = 200;
+  image.style.position = "absolute";
+  image.style.left = x + "px";
+  image.style.top = y + "px";
+  image.setAttribute("src", url);
+  nd.appendChild(image);
+}
         
         var start =0;
         var trigger=0;
