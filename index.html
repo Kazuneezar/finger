@@ -28,6 +28,21 @@
 
     // Load the image model and setup the webcam
     async function init() {
+
+        var nd = document.getElementById("pic");
+        var url ="3.jpg";
+        dispic(nd, url, 450, 60);
+
+        function dispic(nd, url, x, y) {
+        var image = new Image();
+        image.src = url;
+        image.width = 200;
+        image.style.position = "absolute";
+        image.style.left = x + "px";
+        image.style.top = y + "px";
+        image.setAttribute("src", url);
+        nd.appendChild(image);
+        }
         console.log('poyo');
         const modelURL = URL + "model.json";
         const metadataURL = URL + "metadata.json";
@@ -59,7 +74,7 @@
 
         var nd = document.getElementById("pic");
 var url ="1.jpg";
-dispic(nd, url, 450, 80);
+dispic(nd, url, 450, 60);
 
 function dispic(nd, url, x, y) {
   var image = new Image();
@@ -397,6 +412,20 @@ function dispic(nd, url, x, y) {
         end = Date.now(); // 終了時間
         }
     trigger=2;
+    var nd = document.getElementById("pic");
+    var url ="2.jpg";
+    dispic(nd, url, 450, 60);
+
+    function dispic(nd, url, x, y) {
+    var image = new Image();
+    image.src = url;
+    image.width = 200;
+    image.style.position = "absolute";
+    image.style.left = x + "px";
+    image.style.top = y + "px";
+    image.setAttribute("src", url);
+    nd.appendChild(image);
+    }
     time=Math.floor((end - start)/1000);
     minute = Math.floor(time/60);
     second = time%60
