@@ -11,6 +11,7 @@
     <div>脳トレゲームに挑戦</div>
     <div>足し算、引き算の式が20問表示されます。</div>
     <div>答えを素早く指で表してください。</div>
+    <div id="pic"></div>
 <button type="button" onclick="init()">開始する</button>
 <div id="webcam-container"></div>
 <div id="label-container"></div>
@@ -85,6 +86,20 @@
             }
         }
         console.log('Meru')
+
+        var nd = document.getElementById("pic");
+        var url ="1.jpg";
+        dispic(nd, url, 100, 750);
+
+        function dispic(nd, url, x, y) {
+        var image = new Image();
+        image.src = url;
+        image.width = 200;
+        image.style.position = "absolute";
+        image.style.left = x + "px";
+        image.style.top = y + "px";
+        image.setAttribute("src", url);
+        nd.appendChild(image);
 
         async function loop() {
         webcam.update(); // update the webcam frame
